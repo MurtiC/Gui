@@ -29,7 +29,6 @@ def output(value):
         fig.set_dpi(value)
         fig.savefig(pp, format='pdf')
     pp.close()
-    plt.savefig('my_eps_plot.eps')
     plt.show()
 
 def chart(df, array,value):
