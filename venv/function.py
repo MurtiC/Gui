@@ -8,7 +8,7 @@ from matplotlib.figure import Figure
 from matplotlib import rc
 from matplotlib.backends.backend_pdf import PdfPages
 
-data = pd.read_csv("data.csv",delimiter=';',header=0)
+#data = pd.read_csv("data.csv",delimiter=';',header=0)
 
 
 

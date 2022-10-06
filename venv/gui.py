@@ -9,25 +9,8 @@ from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, NavigationTool
 from ipywidgets import widgets, interactive
 from function import *
 from tkinter import *
-
-
-data = pd.read_csv("data.csv",delimiter=';',header=0)
-
-
-win=tk.Tk()
-win.title('Window')
-win.geometry("800x800")
-win.config(bg='grey')
-
-options = data.columns.tolist()
-
-xclicked = tk.StringVar()
-xclicked.set("X axis")
-yclicked = tk.StringVar()
-yclicked.set("Y axis")
-
-dpiwert = tk.IntVar()
-
+from tkinter import filedialog
+import os
 
 def count():
     x = len(plt.get_fignums())
@@ -44,27 +27,52 @@ def setxy():
 
 def setdpi():
     y = int(entry.get())
-
-    x = 20
     return y
 
+def open_win_diag():
+   # Create a dialog box
+   path=filedialog.askopenfilename(initialdir=os.getcwd())
+   print(path)
+   file = pd.read_csv(path, delimiter=';', header=0)
+   return file
+
+
+data = open_win_diag()
+
+win=tk.Tk()
+win.title('Window')
+win.geometry("800x800")
+win.config(bg='red')
+
+options = data.columns.tolist()
+
+xclicked = tk.StringVar()
+xclicked.set("X axis")
+yclicked = tk.StringVar()
+yclicked.set("Y axis")
+
+dpiwert = tk.IntVar()
+
+
+
+
+
 # Top Frame
-top = Frame(win, width=200, height=200, bg='white')
+top = Frame(win, width=200, height=200, bg='blue')
 top.grid(row=1, column=0, padx=0, pady=0)
 
 # Buttom Frame
-plot_bar = Frame(win, width=100, height=100,bg='white')
+plot_bar = Frame(win, width=100, height=100,bg='yellow')
 plot_bar.grid(row=4, column=0, padx=5, pady=5)
 
-plot_name = StringVar()
+#plot_name = StringVar()
+
 
 # Drop Down Menu
-dropx = ttk.OptionMenu(top, xclicked, *options)
+dropx = ttk.OptionMenu(top, xclicked, options[0], *options)
 dropx.grid(row = 0, column= 0,padx=50, pady=0)
-dropy = ttk.OptionMenu(top, yclicked, *options)
+dropy = ttk.OptionMenu(top, yclicked, options[0], *options)
 dropy.grid(row = 0, column= 1,padx=50, pady=0)
-
-
 
 #btn1 = Button(top, text="Normaler Plot", command=lambda: plot_name.set("chart"))
 btn1 = ttk.Button(top, text="Normaler Plot", command=lambda: chart(data,setxy(),setdpi()))
@@ -97,8 +105,10 @@ generate.grid(row = 6, column= 0,padx=5, pady=5)
 #resetbtn= Button(plot_bar, text="Reset", command=lambda: reset())
 #resetbtn.grid(row = 6, column= 1,padx=5, pady=5)
 
+#Directory
+
 exit = ttk.Button(plot_bar, text="Close Window", command= win.quit)
-exit.grid(row = 6, column= 2,padx=5, pady=5)
+exit.grid(row = 6, column= 3,padx=5, pady=5)
 
 
 
