@@ -4,9 +4,11 @@ import matplotlib as mpl
 import matplotlib.pyplot as plt
 import seaborn
 import csv
+import tikzplotlib as tp
 from matplotlib.figure import Figure
 from matplotlib import rc
 from matplotlib.backends.backend_pdf import PdfPages
+
 
 #data = pd.read_csv("data.csv",delimiter=';',header=0)
 
@@ -17,17 +19,21 @@ from matplotlib.backends.backend_pdf import PdfPages
 
 def output(value):
     x = len(plt.get_fignums())
-    #fig, ax = plt.subplots(x, 1)
-    #figs = list(map(plt.figure, plt.get_fignums()))
-    #print("Number of figures created: ", len(plt.get_fignums()))
-    #fig, axis = plt.subplots(len(plt.get_fignums()))
+
+    #plt.rcParams.update({
+    #    "text.usetex": True,
+    #    "font.family": "Bahnschrift"
+    #})
+
     filename = "output.pdf"
     pp = PdfPages(filename)
     fig_nums = plt.get_fignums()
     figs = [plt.figure(n) for n in fig_nums]
     for fig in figs:
         fig.set_dpi(value)
+
         fig.savefig(pp, format='pdf')
+    tp.save("test.tex")
     pp.close()
     plt.show()
 
