@@ -13,37 +13,20 @@ from matplotlib.backends.backend_pdf import PdfPages
 #data = pd.read_csv("data.csv",delimiter=';',header=0)
 
 
+cm = 1/2.54
 
 
 
 
-def output(value):
-    x = len(plt.get_fignums())
-
-    #plt.rcParams.update({
-    #    "text.usetex": True,
-    #    "font.family": "Bahnschrift"
-    #})
-
-    filename = "output.pdf"
-    pp = PdfPages(filename)
-    fig_nums = plt.get_fignums()
-    figs = [plt.figure(n) for n in fig_nums]
-    for fig in figs:
-        fig.set_dpi(value)
-
-        fig.savefig(pp, format='pdf')
-    tp.save("test.tex")
-    pp.close()
-    plt.show()
 
 def chart(df, array,value):
     rc('text', usetex=True)
     plt.rc('legend', frameon=False)
     x = df.loc[:, array[0]]
     y = df.loc[:, array[1]]
-    fig = plt.figure(figsize=(6, 4))
+    fig = plt.figure(figsize=(16 * cm, 9* cm))
     fig.set_dpi(value)
+    #plt.subplots(figsize=(30 * cm, 30* cm))
     plt.plot(x, y, label=r'$Test$',color='red')
     plt.legend(loc="upper left")
     plt.xlabel(array[0])

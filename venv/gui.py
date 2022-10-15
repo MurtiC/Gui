@@ -5,6 +5,7 @@ import numpy as np
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 from matplotlib.figure import Figure
+from matplotlib.widgets import Slider
 from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, NavigationToolbar2Tk)
 from ipywidgets import widgets, interactive
 from function import *
@@ -36,6 +37,29 @@ def open_win_diag():
    file = pd.read_csv(path, delimiter=';', header=0)
    return file
 
+def update():
+    win.destroy()
+    os.system('python main.py')
+
+def sel():
+   selection = "Value = " + str(var.get())
+   labell.config(text = selection)
+
+def output(value):
+    x = len(plt.get_fignums())
+
+    filename = "output.pdf"
+    pp = PdfPages(filename)
+    fig_nums = plt.get_fignums()
+    figs = [plt.figure(n) for n in fig_nums]
+    for fig in figs:
+        fig.set_dpi(value)
+
+        fig.savefig(pp, format='pdf')
+    #tp.save("test.tex")
+    pp.close()
+    plt.show()
+
 
 data = open_win_diag()
 
@@ -61,18 +85,40 @@ dpiwert = tk.IntVar()
 top = Frame(win, width=200, height=200, bg='blue')
 top.grid(row=1, column=0, padx=0, pady=0)
 
+# XY Frame
+xy = Frame(win, width=200, height=200, bg='green')
+xy.grid(row=0, column=0, padx=0, pady=0)
+
 # Buttom Frame
 plot_bar = Frame(win, width=100, height=100,bg='yellow')
 plot_bar.grid(row=4, column=0, padx=5, pady=5)
 
-#plot_name = StringVar()
+
 
 
 # Drop Down Menu
-dropx = ttk.OptionMenu(top, xclicked, options[0], *options)
+dropx = ttk.OptionMenu(xy, xclicked, options[0], *options)
 dropx.grid(row = 0, column= 0,padx=50, pady=0)
-dropy = ttk.OptionMenu(top, yclicked, options[0], *options)
+dropy = ttk.OptionMenu(xy, yclicked, options[0], *options)
 dropy.grid(row = 0, column= 1,padx=50, pady=0)
+
+
+var = DoubleVar()
+vary = DoubleVar()
+
+width = Scale(xy,from_= 0, to=200, orient=HORIZONTAL, variable= var)
+width.grid(row = 1,column= 0,padx=50, pady=0)
+height = Scale(xy,from_= 0, to=200, orient=HORIZONTAL, variable= vary)
+height.grid(row = 1,column= 1,padx=50, pady=0)
+
+button = Button(top, text="Get Scale Value", command=sel)
+button.grid(row = 0, column= 3,padx=50, pady=0)
+
+labell = Label(top)
+labell.grid(row = 0, column= 4,padx=50, pady=0)
+
+
+
 
 #btn1 = Button(top, text="Normaler Plot", command=lambda: plot_name.set("chart"))
 btn1 = ttk.Button(top, text="Normaler Plot", command=lambda: chart(data,setxy(),setdpi()))
@@ -101,6 +147,9 @@ entry.grid(row = 5, column= 1,padx=0, pady=5)
 
 generate = ttk.Button(plot_bar, text="Generate", command=lambda: output(setdpi()))
 generate.grid(row = 6, column= 0,padx=5, pady=5)
+
+generate = ttk.Button(plot_bar, text="Change File", command=lambda: update())
+generate.grid(row = 6, column= 1,padx=5, pady=5)
 
 #resetbtn= Button(plot_bar, text="Reset", command=lambda: reset())
 #resetbtn.grid(row = 6, column= 1,padx=5, pady=5)
