@@ -22,7 +22,11 @@ def count():
     plotcount.config(text = x)
 
 def sel():
-   scalelabel.config(text = str(varx.get()) + " and " + str(vary.get()))
+    xscale = str(varx.get())
+    yscale = str(vary.get())
+    scalelabel.config(text = xscale + " and " + yscale)
+    print(xscale)
+    print(yscale)
 
 
 def setxy():
