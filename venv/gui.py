@@ -13,12 +13,16 @@ from tkinter import *
 from tkinter import filedialog
 import os
 
+
+
 def count():
     x = len(plt.get_fignums())
-    label.config(text = x)
+    plotcount.config(text = x)
 
-def reset():
-    label.config(text = 0)
+def sel():
+   x = "Current Value is: " + str(varx.get())
+   scalelabel.config(text = x)
+
 
 def setxy():
     x = xclicked.get()
@@ -41,9 +45,7 @@ def update():
     win.destroy()
     os.system('python main.py')
 
-def sel():
-   selection = "Value = " + str(var.get())
-   labell.config(text = selection)
+
 
 def output(value):
     x = len(plt.get_fignums())
@@ -76,7 +78,8 @@ yclicked = tk.StringVar()
 yclicked.set("Y axis")
 
 dpiwert = tk.IntVar()
-
+varx = DoubleVar()
+vary = IntVar()
 
 
 
@@ -103,19 +106,18 @@ dropy = ttk.OptionMenu(xy, yclicked, options[0], *options)
 dropy.grid(row = 0, column= 1,padx=50, pady=0)
 
 
-var = DoubleVar()
-vary = DoubleVar()
 
-width = Scale(xy,from_= 0, to=200, orient=HORIZONTAL, variable= var)
+
+width = Scale(xy,from_= 1, to=200, orient=HORIZONTAL, variable= varx)
 width.grid(row = 1,column= 0,padx=50, pady=0)
-height = Scale(xy,from_= 0, to=200, orient=HORIZONTAL, variable= vary)
+height = Scale(xy,from_= 1, to=200, orient=HORIZONTAL, variable= vary)
 height.grid(row = 1,column= 1,padx=50, pady=0)
 
-button = Button(top, text="Get Scale Value", command=sel)
-button.grid(row = 0, column= 3,padx=50, pady=0)
+scalebtn = Button(top, text="Get Scale Value", command= sel)
+scalebtn.grid(row = 0, column= 0,padx=50, pady=0)
 
-labell = Label(top)
-labell.grid(row = 0, column= 4,padx=50, pady=0)
+scalelabel = Label(top)
+scalelabel.grid(row = 0, column= 4,padx=50, pady=0)
 
 
 
@@ -132,32 +134,36 @@ btn2.grid(row = 2, column= 0,padx=5, pady=5)
 btn3 = ttk.Button(top, text="Hist Plot", command=lambda: hist(data,setxy(),setdpi()))
 btn3.grid(row = 3, column= 0,padx=5, pady=5)
 
+# Display the number of plots, optional
 button = ttk.Button(top, text= "Number of Plots",  command=lambda: count())
 button.grid(row = 4, column= 0,padx=5, pady=5)
 
-label = ttk.Label(top)
-label.grid(row = 4, column= 1,padx=0, pady=5)
+plotcount = ttk.Label(top)
+plotcount.grid(row = 4, column= 1,padx=0, pady=5)
 
-labeldpi = ttk.Label(top, text = "Set DPI (default = 100)")
+
+labeldpi = ttk.Label(top, text = "Set DPI (default = 200)")
 labeldpi.grid(row = 5, column= 0,padx=0, pady=5)
 entry = ttk.Entry(top)
-entry.insert(END, '100')
+entry.insert(END, '200')
 entry.grid(row = 5, column= 1,padx=0, pady=5)
 
 
 generate = ttk.Button(plot_bar, text="Generate", command=lambda: output(setdpi()))
 generate.grid(row = 6, column= 0,padx=5, pady=5)
 
-generate = ttk.Button(plot_bar, text="Change File", command=lambda: update())
-generate.grid(row = 6, column= 1,padx=5, pady=5)
+change = ttk.Button(plot_bar, text="Change File", command=lambda: update())
+change.grid(row = 6, column= 1,padx=5, pady=5)
+
+exit = ttk.Button(plot_bar, text="Close Window", command= win.quit)
+exit.grid(row = 6, column= 3,padx=5, pady=5)
+
 
 #resetbtn= Button(plot_bar, text="Reset", command=lambda: reset())
 #resetbtn.grid(row = 6, column= 1,padx=5, pady=5)
 
 #Directory
 
-exit = ttk.Button(plot_bar, text="Close Window", command= win.quit)
-exit.grid(row = 6, column= 3,padx=5, pady=5)
 
 
 
