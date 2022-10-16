@@ -24,9 +24,10 @@ def count():
 def sel():
     xscale = str(varx.get())
     yscale = str(vary.get())
-    scalelabel.config(text = xscale + " and " + yscale)
     print(xscale)
     print(yscale)
+    scalelabel.config(text = xscale + " and " + yscale)
+
 
 
 def setxy():
