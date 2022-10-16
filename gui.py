@@ -28,9 +28,10 @@ def sel():
     print(type(xscale))
     x = int(float(xscale))
     y = int(float(yscale))
-    #print(x)
-    #print(y)
-    #scalelabel.config(text = x + " and " +y)
+    print(x)
+    print(y)
+
+    #scalelabel.config(text = z)
 
 
 
