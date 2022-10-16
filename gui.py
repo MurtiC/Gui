@@ -22,8 +22,7 @@ def count():
     plotcount.config(text = x)
 
 def sel():
-   x = "Current Value is: " + str(varx.get())
-   scalelabel.config(text = x)
+   scalelabel.config(text = str(varx.get()) + " and " + str(vary.get()))
 
 
 def setxy():
@@ -59,7 +58,7 @@ def output(value):
     for fig in figs:
         fig.set_dpi(value)
 
-        fig.savefig(pp, format='pdf')
+    #    fig.savefig(pp, format='pdf')
 
     pp.close()
     plt.show()
@@ -81,7 +80,7 @@ yclicked.set("Y axis")
 
 dpiwert = tk.IntVar()
 varx = DoubleVar()
-vary = IntVar()
+vary = DoubleVar()
 
 
 
