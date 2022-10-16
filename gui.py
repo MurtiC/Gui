@@ -22,11 +22,15 @@ def count():
     plotcount.config(text = x)
 
 def sel():
-    xscale = str(varx.get())
-    yscale = str(vary.get())
-    print(xscale)
-    print(yscale)
-    scalelabel.config(text = xscale + " and " + yscale)
+
+    xscale = str(width.get())
+    yscale = str(height.get())
+    print(type(xscale))
+    x = int(float(xscale))
+    y = int(float(yscale))
+    #print(x)
+    #print(y)
+    #scalelabel.config(text = x + " and " +y)
 
 
 
@@ -84,8 +88,10 @@ yclicked = tk.StringVar()
 yclicked.set("Y axis")
 
 dpiwert = tk.IntVar()
-varx = DoubleVar()
-vary = DoubleVar()
+varx = IntVar()
+vary = IntVar()
+
+
 
 
 
