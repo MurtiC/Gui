@@ -55,8 +55,8 @@ def update():
 def output(value):
     x = len(plt.get_fignums())
 
-    filename = "output.pdf"
-    pp = PdfPages(filename)
+    #filename = "output"
+    #pp = PdfPages(filename)
     fig_nums = plt.get_fignums()
     figs = [plt.figure(n) for n in fig_nums]
     for fig in figs:
@@ -64,7 +64,7 @@ def output(value):
 
     #    fig.savefig(pp, format='pdf')
 
-    pp.close()
+    #pp.close()
     plt.show()
 
 

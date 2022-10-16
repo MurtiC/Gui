@@ -4,7 +4,6 @@ import matplotlib as mpl
 import matplotlib.pyplot as plt
 import seaborn
 import csv
-import tikzplotlib as tp
 from matplotlib.figure import Figure
 from matplotlib import rc
 from matplotlib.backends.backend_pdf import PdfPages
