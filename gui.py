@@ -8,7 +8,7 @@ from matplotlib.figure import Figure
 from matplotlib.widgets import Slider
 from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, NavigationToolbar2Tk)
 from ipywidgets import widgets, interactive
-from function import *
+from charts import *
 from tkinter import *
 from tkinter import filedialog
 import os
@@ -25,12 +25,10 @@ def sel():
 
     xscale = str(width.get())
     yscale = str(height.get())
-    print(type(xscale))
     x = int(float(xscale))
     y = int(float(yscale))
-    print(x)
-    print(y)
-
+    wh = [x,y]
+    return wh
     #scalelabel.config(text = z)
 
 
@@ -121,10 +119,10 @@ dropy.grid(row = 0, column= 1,padx=50, pady=0)
 
 
 
-width = Scale(xy,from_= 1, to=200, orient=HORIZONTAL, variable= varx)
-width.grid(row = 1,column= 0,padx=50, pady=0)
-height = Scale(xy,from_= 1, to=200, orient=HORIZONTAL, variable= vary)
-height.grid(row = 1,column= 1,padx=50, pady=0)
+width = Scale(xy,from_= 1, to=30, orient=HORIZONTAL, variable= varx)
+width.grid(row = 1,column= 0,padx=50, pady=10)
+height = Scale(xy,from_= 1, to=30, orient=HORIZONTAL, variable= vary)
+height.grid(row = 1,column= 1,padx=50, pady=10)
 
 scalebtn = Button(top, text="Get Scale Value", command= sel)
 scalebtn.grid(row = 0, column= 0,padx=50, pady=0)
@@ -136,7 +134,7 @@ scalelabel.grid(row = 0, column= 4,padx=50, pady=0)
 
 
 #btn1 = Button(top, text="Normaler Plot", command=lambda: plot_name.set("chart"))
-btn1 = ttk.Button(top, text="Normaler Plot", command=lambda: chart(data,setxy(),setdpi()))
+btn1 = ttk.Button(top, text="Normaler Plot", command=lambda: chart(data,setxy(),setdpi(),sel()))
 btn1.grid(row = 1, column= 0,padx=5, pady=5)
 
 #btn2 = Button(top, text="Scatter Plot", command=lambda: plot_name.set("scatter"))
