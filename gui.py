@@ -96,15 +96,15 @@ vary = IntVar()
 
 
 # Top Frame
-top = Frame(win, width=200, height=200, bg='blue')
+top = Frame(win, width=200, height=200, bg='white')
 top.grid(row=1, column=0, padx=0, pady=0)
 
 # XY Frame
-xy = Frame(win, width=200, height=200, bg='green')
+xy = Frame(win, width=200, height=200, bg='white')
 xy.grid(row=0, column=0, padx=0, pady=0)
 
 # Buttom Frame
-plot_bar = Frame(win, width=100, height=100,bg='yellow')
+plot_bar = Frame(win, width=100, height=100,bg='white')
 plot_bar.grid(row=4, column=0, padx=5, pady=5)
 
 
@@ -131,18 +131,16 @@ scalelabel = Label(top)
 scalelabel.grid(row = 0, column= 4,padx=50, pady=0)
 
 
-
-
 #btn1 = Button(top, text="Normaler Plot", command=lambda: plot_name.set("chart"))
 btn1 = ttk.Button(top, text="Normaler Plot", command=lambda: chart(data,setxy(),setdpi(),sel()))
 btn1.grid(row = 1, column= 0,padx=5, pady=5)
 
 #btn2 = Button(top, text="Scatter Plot", command=lambda: plot_name.set("scatter"))
-btn2 = ttk.Button(top, text="Scatter Plot", command=lambda: scatter(data,setxy(),setdpi()))
+btn2 = ttk.Button(top, text="Scatter Plot", command=lambda: scatter(data,setxy(),setdpi(),sel()))
 btn2.grid(row = 2, column= 0,padx=5, pady=5)
 
 #btn3 = Button(top, text="Hist Plot", command=lambda: plot_name.set("hist"))
-btn3 = ttk.Button(top, text="Hist Plot", command=lambda: hist(data,setxy(),setdpi()))
+btn3 = ttk.Button(top, text="Hist Plot", command=lambda: hist(data,setxy(),setdpi(),sel()))
 btn3.grid(row = 3, column= 0,padx=5, pady=5)
 
 # Display the number of plots, optional
@@ -172,20 +170,6 @@ exit.grid(row = 6, column= 3,padx=5, pady=5)
 
 #resetbtn= Button(plot_bar, text="Reset", command=lambda: reset())
 #resetbtn.grid(row = 6, column= 1,padx=5, pady=5)
-
-#Directory
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

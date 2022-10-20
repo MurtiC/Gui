@@ -27,23 +27,23 @@ def chart(df, array,value,wh):
     plt.xlabel(array[0])
     plt.ylabel(array[1])
 
-def scatter(df,array,value):
+def scatter(df,array,value,wh):
     rc('text', usetex=True)
     plt.rc('legend', frameon=False)
     x = df.loc[:, array[0]]
     y = df.loc[:, array[1]]
-    fig = plt.figure(figsize=(6, 4))
+    fig = plt.figure(figsize=(wh[0] * cm, wh[1] * cm))
     fig.set_dpi(value)
     plt.xlabel(array[0])
     plt.ylabel(array[1])
     plt.scatter(x, y,color='red')
 
-def hist(df,array,value):
+def hist(df,array,value,wh):
     rc('text', usetex=True)
     plt.rc('legend', frameon=False)
     x = df.loc[:, array[0]]
     y = df.loc[:, array[1]]
-    fig = plt.figure(figsize=(6, 4))
+    fig = plt.figure(figsize=(wh[0] * cm, wh[1] * cm))
     fig.set_dpi(value)
     plt.xlabel(array[0])
     plt.ylabel(array[1])
