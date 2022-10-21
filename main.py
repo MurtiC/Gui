@@ -1,5 +1,5 @@
 from gui import *
-from function import *
+from charts import *
 
 
 
