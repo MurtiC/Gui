@@ -34,6 +34,7 @@ def sel():
 
 
 def setxy():
+
     x = xclicked.get()
     y = yclicked.get()
     z = [x,y]
@@ -71,6 +72,10 @@ def output(value):
     #pp.close()
     plt.show()
 
+def selectplot():
+    x = plotoption.get()
+    return eval(x +"(data,setxy(),setdpi(),sel())")
+
 
 data = open_win_diag()
 
@@ -82,18 +87,20 @@ win.config(bg='red')
 options = data.columns.tolist()
 
 xclicked = tk.StringVar()
-xclicked.set("X axis")
 yclicked = tk.StringVar()
+
 yclicked.set("Y axis")
+xclicked.set("X axis")
+
+plotoption = tk.StringVar()
+
+
 
 dpiwert = tk.IntVar()
 varx = IntVar()
 vary = IntVar()
 
-
-
-
-
+plotnames = ['chart','scatter','hist']
 
 # Top Frame
 top = Frame(win, width=200, height=200, bg='white')
@@ -110,13 +117,15 @@ plot_bar.grid(row=4, column=0, padx=5, pady=5)
 
 
 
+
+
 # Drop Down Menu
 dropx = ttk.OptionMenu(xy, xclicked, options[0], *options)
 dropx.grid(row = 0, column= 0,padx=50, pady=0)
 dropy = ttk.OptionMenu(xy, yclicked, options[0], *options)
 dropy.grid(row = 0, column= 1,padx=50, pady=0)
-
-
+dropf = ttk.OptionMenu(top, plotoption,plotnames[0],*plotnames)
+dropf.grid(row = 1, column= 1,padx=50, pady=0)
 
 
 width = Scale(xy,from_= 1, to=30, orient=HORIZONTAL, variable= varx)
@@ -124,24 +133,26 @@ width.grid(row = 1,column= 0,padx=50, pady=10)
 height = Scale(xy,from_= 1, to=30, orient=HORIZONTAL, variable= vary)
 height.grid(row = 1,column= 1,padx=50, pady=10)
 
-scalebtn = Button(top, text="Get Scale Value", command= sel)
-scalebtn.grid(row = 0, column= 0,padx=50, pady=0)
+#scalebtn = Button(top, text="Get Scale Value", command= sel)
+#scalebtn.grid(row = 0, column= 0,padx=50, pady=0)
 
-scalelabel = Label(top)
-scalelabel.grid(row = 0, column= 4,padx=50, pady=0)
+#scalelabel = Label(top)
+#scalelabel.grid(row = 0, column= 4,padx=50, pady=0)
 
 
 #btn1 = Button(top, text="Normaler Plot", command=lambda: plot_name.set("chart"))
-btn1 = ttk.Button(top, text="Normaler Plot", command=lambda: chart(data,setxy(),setdpi(),sel()))
+#btn1 = ttk.Button(top, text="Normaler Plot", command=lambda: chart(data,setxy(),setdpi(),sel()))
+#btn1.grid(row = 1, column= 0,padx=5, pady=5)
+btn1 = ttk.Button(top, text="Choose Plot", command=lambda: selectplot())
 btn1.grid(row = 1, column= 0,padx=5, pady=5)
 
-#btn2 = Button(top, text="Scatter Plot", command=lambda: plot_name.set("scatter"))
-btn2 = ttk.Button(top, text="Scatter Plot", command=lambda: scatter(data,setxy(),setdpi(),sel()))
-btn2.grid(row = 2, column= 0,padx=5, pady=5)
 
+#btn2 = Button(top, text="Scatter Plot", command=lambda: plot_name.set("scatter"))
+#btn2 = ttk.Button(top, text="Scatter Plot", command=lambda: scatter(data,setxy(),setdpi(),sel()))
+#btn2.grid(row = 2, column= 0,padx=5, pady=5)
 #btn3 = Button(top, text="Hist Plot", command=lambda: plot_name.set("hist"))
-btn3 = ttk.Button(top, text="Hist Plot", command=lambda: hist(data,setxy(),setdpi(),sel()))
-btn3.grid(row = 3, column= 0,padx=5, pady=5)
+#btn3 = ttk.Button(top, text="Hist Plot", command=lambda: hist(data,setxy(),setdpi(),sel()))
+#btn3.grid(row = 3, column= 0,padx=5, pady=5)
 
 # Display the number of plots, optional
 button = ttk.Button(top, text= "Number of Plots",  command=lambda: count())
@@ -153,6 +164,7 @@ plotcount.grid(row = 4, column= 1,padx=0, pady=5)
 
 labeldpi = ttk.Label(top, text = "Set DPI (default = 200)")
 labeldpi.grid(row = 5, column= 0,padx=0, pady=5)
+
 entry = ttk.Entry(top)
 entry.insert(END, '200')
 entry.grid(row = 5, column= 1,padx=0, pady=5)
