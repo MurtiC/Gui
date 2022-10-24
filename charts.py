@@ -19,14 +19,18 @@ def chart(df, array,value,wh):
     plt.rc('legend', frameon=False)
     x = df.loc[:, array[0]]
     y = df.loc[:, array[1]]
-    fig = plt.figure(figsize=(wh[0] * cm, wh[1]* cm))
+    # fig = plt.figure(figsize=(wh[0] * cm, wh[1]* cm))
+    fig, ax = plt.subplots(figsize=(wh[0] * cm, wh[1] * cm), tight_layout=True)
+    # fig.set_dpi(value)
     fig.set_dpi(value)
-    #plt.subplots(figsize=(30 * cm, 30* cm))
-    plt.plot(x, y, label=r'$Test$',color='red')
-    plt.legend(loc="upper left")
-    plt.xlabel(array[0])
-    plt.ylabel(array[1])
-
+    ax.plot(x, y, label=r'$Test Label$', color='red')
+    # ax.plot(x, y, label=r'$\forsen$!',color='red')
+    ax.set_xlabel(array[0])
+    ax.set_ylabel(array[1])
+    ax.set_title("Test Title")
+    ax.legend(loc="upper left")
+    # plt.xlabel(array[0])
+    # plt.ylabel(array[1])
 def scatter(df,array,value,wh):
     rc('text', usetex=True)
     plt.rc('legend', frameon=False)
