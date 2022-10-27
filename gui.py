@@ -102,10 +102,10 @@ dropf.grid(row = 1, column= 1,padx=50, pady=0)
 
 # Set Length of the xy axis
 xnumber = ttk.Entry(xy)
-xnumber.insert(END, '16')
+xnumber.insert(END, '10')
 xnumber.grid(row = 1,column= 0,padx=50, pady=10)
 ynumber = ttk.Entry(xy)
-ynumber.insert(END, '9')
+ynumber.insert(END, '8')
 ynumber.grid(row = 1,column= 1,padx=50, pady=10)
 
 
